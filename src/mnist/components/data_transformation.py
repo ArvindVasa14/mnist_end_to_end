@@ -44,11 +44,13 @@ class DataTransformation:
             test_input_features= test_df.drop('label', axis= 1)
 
             train_arr= np.c_[preprocessor.fit_transform(train_input_features), np.array(train_df['label'])]
-            test_arr= np.c_[preprocessor.fit_transform(test_input_features), np.array(test_df['label'])]
+            test_arr= np.c_[preprocessor.transform(test_input_features), np.array(test_df['label'])]
 
             preprocessor_path= os.path.join('artifacts','preprocessor.pkl')
             with open(preprocessor_path, 'wb') as preprocess_file:
                 pickle.dump(preprocessor ,preprocess_file)
+
+            print(train_arr.shape, test_arr.shape)
 
             return (train_arr, test_arr,preprocessor_path)
 
@@ -58,12 +60,5 @@ class DataTransformation:
 
 
 
-if __name__=='__main__':
-    obj1= DataIngestion()
-    train_path, test_path= obj1.initiate_data_ingestion()
 
-    obj2= DataTransformation()
-    train_arr, test_arr,preprocessor_path= obj2.initiate_data_transformation(train_path, test_path)
-
-    print(train_arr[0])
     
