@@ -1,4 +1,4 @@
-import logging
+from mnist.logger import logging
 import os
 import numpy as np
 import pandas as pd
@@ -23,6 +23,7 @@ class DataIngestion:
 
             test_data = pd.DataFrame(data=x_test_flat, columns=[f'pixel_{i}' for i in range(x_test_flat.shape[1])])
             test_data['label'] = y_test
+        
             os.makedirs('artifacts', exist_ok=True)
             train_data.to_csv(self.ingestion_config.train_data_path, index=False)
             test_data.to_csv(self.ingestion_config.test_data_path, index=False)
