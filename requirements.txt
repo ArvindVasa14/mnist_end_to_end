@@ -4,6 +4,7 @@ matplotlib
 seaborn
 tensorflow
 scipy
+scikit-learn
 Flask
 Flask-Cors
 notebook
